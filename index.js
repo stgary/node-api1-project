@@ -4,9 +4,6 @@ const shortid = require('shortid');
 const server = express();
 server.use(express.json()); 
 
-const port = 3000;
-server.listen(port, () => console.log("server running..."));
-
 let users = [
     { id: shortid.generate(), name: 'Steve', bio: 'Student'  }
 ]
@@ -59,3 +56,6 @@ server.delete("/api/users/:id", (req, res) => {
     user = users.filter(u => u.id === id);
     res.status(204).end();
 });
+
+const PORT = 8008;
+server.listen(PORT, () => console.log(`Server running on ${PORT}`));
