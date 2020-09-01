@@ -5,7 +5,16 @@ const server = express();
 server.use(express.json()); 
 
 let users = [
-    { id: shortid.generate(), name: 'Steve', bio: 'Student'  }
+    { 
+        id: shortid.generate(), 
+        name: 'Steve', 
+        bio: 'Student at Lambda School'  
+    },
+    {
+        id: shortid.generate(),
+        name: 'Carl',
+        bio: 'pushing around shopping carts for fun'
+    }
 ]
 
 server.get("/api/users", (req, res) => {
@@ -33,7 +42,7 @@ server.get("/api/users/:id", (req, res) => {
     const changes = req.body;
     let found = users.find(u => u.id === id);
     if (found) {
-        res.status(200).json(users);
+        res.status(200).json(found);
     } else {
         res.status(500).json({ message: `There is no user with id ${id}` });
     }
@@ -54,7 +63,7 @@ server.put("/api/users/:id", (req, res) => {
 server.delete("/api/users/:id", (req, res) => {
     const id = req.params.id;
     user = users.filter(u => u.id === id);
-    res.status(204).end();
+    res.status(200).json({ message: 'The user was deleted' });
 });
 
 const PORT = 8008;
